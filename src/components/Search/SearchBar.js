@@ -6,13 +6,13 @@ function SearchBar(props) {
   useEffect(() => {
     const handle = setTimeout(() => {
       props.onSearch(value);
-    }, 1000)
+    }, 400)
     return () => clearTimeout(handle);
   }, [value]);
 
   return (
     <div className="SearchBar">
-      <form>
+      <form onSubmit={event => event.preventDefault()}>
         <input
           type="text"
           spellCheck="false"
