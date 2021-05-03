@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import "../../styles/Search.scss";
+import "../../styles/Results.scss";
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 
@@ -39,7 +40,7 @@ function Search(props) {
   }, [search.term]);
 
   return (
-    <div className="Search">
+    <div className="search">
       <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
       <Results results={search.results}/>
     </div>

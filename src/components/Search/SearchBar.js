@@ -11,7 +11,7 @@ function SearchBar(props) {
   }, [value]);
 
   return (
-    <div className="SearchBar">
+    <div className="searchbar">
       <form onSubmit={event => event.preventDefault()}>
         <input
           type="text"

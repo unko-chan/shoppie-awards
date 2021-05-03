@@ -4,7 +4,7 @@ import Search from "./Search/Search.js"
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Search/>
     </div>
   );
