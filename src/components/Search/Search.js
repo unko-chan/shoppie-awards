@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../styles/Search.scss";
 import SearchBar from "./SearchBar";
+import Results from "./Results";
 
-const API_KEY = process.env.REACT_APP_OMDB_KEY
+const API_KEY = process.env.REACT_APP_OMDB_KEY;
 
 function Search(props) {
   const [search, setSearch] = useState({
@@ -12,18 +13,22 @@ function Search(props) {
     loading: false,
   });
 
+  const prev = useRef("");
+
   useEffect(() => {
-    if (search.term === "") return;
+    if (prev.current === "" && search.term === "") return;
 
     setSearch((prev) => ({
       ...prev,
       loading: true,
     }));
 
+    prev.current = search.term;
+
     axios
       .get(`http://www.omdbapi.com/?s=${search.term}&apikey=${API_KEY}`)
       .then((response) => {
-        console.log(response.data.Search);
+          console.log('get')
         setSearch((search) => ({
           ...search,
           results: response.data.Search,
@@ -35,6 +40,7 @@ function Search(props) {
   return (
     <div className="Search">
       <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
+      {/* <Results results={search.results}/> */}
     </div>
   );
 }

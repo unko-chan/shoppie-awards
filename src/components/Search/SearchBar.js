@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-
-import useDebounce from "../../hooks/useDebounce";
+import React, { useState, useEffect } from "react";
 
 function SearchBar(props) {
   const [value, setValue] = useState("");
 
-  useDebounce(() => props.onSearch(value), 300);
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      props.onSearch(value);
+    }, 1000)
+    return () => clearTimeout(handle);
+  }, [value]);
 
   return (
     <div className="SearchBar">
