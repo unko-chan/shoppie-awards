@@ -28,7 +28,8 @@ function Search(props) {
     axios
       .get(`http://www.omdbapi.com/?s=${search.term}&apikey=${API_KEY}`)
       .then((response) => {
-          console.log('get')
+        console.log('data', response.data.Search)
+
         setSearch((search) => ({
           ...search,
           results: response.data.Search,
@@ -40,7 +41,7 @@ function Search(props) {
   return (
     <div className="Search">
       <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
-      {/* <Results results={search.results}/> */}
+      <Results results={search.results}/>
     </div>
   );
 }
