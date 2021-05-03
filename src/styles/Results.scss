@@ -1,8 +1,18 @@
 .movie {
-    display: flex;
-    border: solid black 1px;
+  display: flex;
+  align-items: center;
+  border: solid rgba(0, 0, 0, 0.233) 1px;
 
-    .movie__poster {
-        width: 48px;
-    }
+  .movie__poster {
+    width: 48px;
+  }
+
+  .movie__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icon__add {
+    margin-left: auto;
+  }
 }
