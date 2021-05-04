@@ -7,13 +7,19 @@ import NominateList from "./Nominate/NominateList.js";
 
 function App(props) {
 
-  const setMovie = (movie) => setNomination([...nomination, movie])
-  const [nomination, setNomination] = useState([])
+  const [nomination, setNomination] = useState({})
+
+  const addNomination = (movie) => {
+    const nominationList = {...nomination}
+    nominationList[movie.imdbID] = { ...movie }
+    setNomination(nominationList)
+  }
+
   console.log(nomination)
 
   return (
     <div className="app">
-      <Search setMovie={setMovie}/>
+      <Search setMovie={addNomination}/>
       <NominateList nominations={nomination}/>
     </div>
   );
