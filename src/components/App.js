@@ -8,10 +8,15 @@ import NominateList from "./Nominate/NominateList.js";
 function App(props) {
 
   const [nomination, setNomination] = useState({})
+  const nominationList = {...nomination}
 
   const addNomination = (movie) => {
-    const nominationList = {...nomination}
     nominationList[movie.imdbID] = { ...movie }
+    setNomination(nominationList)
+  }
+
+  const deleteNomination = (movie) => {
+    delete nominationList[movie]
     setNomination(nominationList)
   }
 
@@ -20,7 +25,7 @@ function App(props) {
   return (
     <div className="app">
       <Search setMovie={addNomination}/>
-      <NominateList nominations={nomination}/>
+      <NominateList nominations={nomination} deleteNomination={deleteNomination}/>
     </div>
   );
 }
