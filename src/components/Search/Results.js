@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-let _ = require('lodash')
+import AddIcon from "@material-ui/icons/Add";
+
+let _ = require("lodash");
 
 function Results(props) {
   const [searchResults, setSearchResults] = useState([]);
@@ -7,7 +9,7 @@ function Results(props) {
     props.results ? setSearchResults(props.results) : setSearchResults([]);
   }, [props.results]);
 
-  return _.uniqBy(searchResults, 'imdbID').map((movie) => {
+  return _.uniqBy(searchResults, "imdbID").map((movie) => {
     return (
       <article className="movie" key={movie.imdbID}>
         <img className="movie__poster" src={movie.Poster} />
@@ -16,6 +18,7 @@ function Results(props) {
           <div className="movie__year">{movie.Year}</div>
           <a href={`https://www.imdb.com/title/${movie.imdbID}`}>IMDb</a>
         </div>
+        <AddIcon className="icon__add" onClick={() => props.setMovie(movie)}/>
       </article>
     );
   });
