@@ -3,29 +3,30 @@ import "../styles/App.scss";
 import Search from "./Search/Search.js";
 import NominateList from "./Nominate/NominateList.js";
 
-
-
 function App(props) {
-
-  const [nomination, setNomination] = useState({})
-  const nominationList = {...nomination}
+  const [nomination, setNomination] = useState({});
+  const nominationList = { ...nomination };
 
   const addNomination = (movie) => {
-    nominationList[movie.imdbID] = { ...movie }
-    setNomination(nominationList)
-  }
+    if (Object.keys(nominationList).length === 5) return;
+    nominationList[movie.imdbID] = { ...movie };
+    setNomination(nominationList);
+  };
 
   const deleteNomination = (movie) => {
-    delete nominationList[movie]
-    setNomination(nominationList)
-  }
+    delete nominationList[movie];
+    setNomination(nominationList);
+  };
 
-  console.log(nomination)
+  console.log(nomination);
 
   return (
     <div className="app">
-      <Search setMovie={addNomination}/>
-      <NominateList nominations={nomination} deleteNomination={deleteNomination}/>
+      <Search setMovie={addNomination} />
+      <NominateList
+        nominations={nomination}
+        deleteNomination={deleteNomination}
+      />
     </div>
   );
 }
