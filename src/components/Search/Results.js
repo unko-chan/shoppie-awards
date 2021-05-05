@@ -10,12 +10,18 @@ function Results(props) {
     props.results ? setSearchResults(props.results) : setSearchResults([]);
   }, [props.results]);
 
+  console.log("nominations", Object.keys(props.nominations));
+
   return _.uniqBy(searchResults, "imdbID").map((movie) => {
     return (
       <MovieListItem
         onClick={() => props.setMovie(movie)}
         {...movie}
-        button={"Add"}
+        button={
+          Object.keys(props.nominations).includes(movie.imdbID)
+            ? "Added"
+            : "Add"
+        }
       />
     );
   });

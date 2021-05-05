@@ -22,7 +22,7 @@ function App(props) {
 
   return (
     <div className="app">
-      <Search setMovie={addNomination} />
+      <Search setMovie={addNomination} nominations={nomination}/>
       <NominateList
         nominations={nomination}
         deleteNomination={deleteNomination}
