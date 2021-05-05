@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
+import MovieListItem from "../MovieListItem";
 
 let _ = require("lodash");
 
@@ -11,15 +12,11 @@ function Results(props) {
 
   return _.uniqBy(searchResults, "imdbID").map((movie) => {
     return (
-      <article className="movie" key={movie.imdbID}>
-        <img className="movie__poster" src={movie.Poster} />
-        <div className="movie__info">
-          <div className="move__title">{movie.Title}</div>
-          <div className="movie__year">{movie.Year}</div>
-          <a href={`https://www.imdb.com/title/${movie.imdbID}`}>IMDb</a>
-        </div>
-        <AddIcon className="icon__add" onClick={() => props.setMovie(movie)}/>
-      </article>
+      <MovieListItem
+        onClick={() => props.setMovie(movie)}
+        {...movie}
+        button={"Add"}
+      />
     );
   });
 }
