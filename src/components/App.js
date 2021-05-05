@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import "../styles/App.scss";
 import Search from "./Search/Search.js";
 import NominateList from "./Nominate/NominateList.js";
+import Snackbar from "./Snackbar"
 
 function App(props) {
   const [nomination, setNomination] = useState({});
   const nominationList = { ...nomination };
 
+  const maxNominations = (Object.keys(nominationList).length === 5)
+
   const addNomination = (movie) => {
-    if (Object.keys(nominationList).length === 5) return;
+    if (maxNominations) return;
     nominationList[movie.imdbID] = { ...movie };
     setNomination(nominationList);
   };
@@ -22,11 +25,12 @@ function App(props) {
 
   return (
     <div className="app">
-      <Search setMovie={addNomination} nominations={nomination}/>
+      <Search setMovie={addNomination} nominations={nomination} />
       <NominateList
         nominations={nomination}
         deleteNomination={deleteNomination}
       />
+      <Snackbar active={maxNominations}>You have selected 5 nominations!</Snackbar>
     </div>
   );
 }
