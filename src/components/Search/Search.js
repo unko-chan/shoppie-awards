@@ -41,7 +41,7 @@ function Search(props) {
   return (
     <div className="search">
       <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
-      <Results results={search.results} setMovie={props.setMovie} />
+      <Results results={search.results} setMovie={props.setMovie} nominations={props.nominations}/>
     </div>
   );
 }
