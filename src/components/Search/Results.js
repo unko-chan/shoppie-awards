@@ -12,7 +12,7 @@ function Results(props) {
 
   console.log("nominations", Object.keys(props.nominations));
 
-  return _.uniqBy(searchResults, "imdbID").map((movie) => {
+  return _.uniqBy(searchResults, "imdbID").slice(0, 5).map((movie) => {
     return (
       <MovieListItem
         onClick={() => props.setMovie(movie)}
@@ -26,6 +26,5 @@ function Results(props) {
     );
   });
 }
-
 
 export default Results;
