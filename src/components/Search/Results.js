@@ -10,21 +10,25 @@ function Results(props) {
     props.results ? setSearchResults(props.results) : setSearchResults([]);
   }, [props.results]);
 
-  console.log("nominations", Object.keys(props.nominations));
+  if (!props.results) {
+    return <div>No results</div>;
+  }
 
-  return _.uniqBy(searchResults, "imdbID").slice(0, 5).map((movie) => {
-    return (
-      <MovieListItem
-        onClick={() => props.setMovie(movie)}
-        {...movie}
-        button={
-          Object.keys(props.nominations).includes(movie.imdbID)
-            ? "Added"
-            : "Add"
-        }
-      />
-    );
-  });
+  return _.uniqBy(searchResults, "imdbID")
+    .slice(0, 5)
+    .map((movie) => {
+      return (
+        <MovieListItem
+          onClick={() => props.setMovie(movie)}
+          {...movie}
+          button={
+            Object.keys(props.nominations).includes(movie.imdbID)
+              ? "Added"
+              : "Add"
+          }
+        />
+      );
+    });
 }
 
 export default Results;
