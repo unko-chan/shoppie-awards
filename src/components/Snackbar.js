@@ -1,5 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import CloseIcon from "@material-ui/icons/Close";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
 const fadeIn = keyframes`
   from {
@@ -25,11 +28,33 @@ const fadeOut = keyframes`
   }
 `;
 
+const handleIcon = (type) => {
+  switch (type) {
+    case "success":
+      return <CheckCircleOutlineIcon />;
+    case "danger":
+      return <ErrorOutlineIcon />;
+  }
+};
+
+const handleBackground = (type) => {
+  switch (type) {
+    case "success":
+      return "#4caf50";
+    case "danger":
+      return "#f44336";
+    default:
+      return;
+  }
+};
+
 const StyledSnackbar = styled.div`
   visibility: ${(props) => (props.active ? "visible" : "hidden")};
+  display: flex;
+  justify-content: space-between;
   min-width: 250px;
   margin-left: -125px;
-  background-color: #4caf50;
+  background-color: ${({ type }) => handleBackground(type)};
   color: #fff;
   text-align: center;
   border-radius: 4px;
@@ -43,9 +68,19 @@ const StyledSnackbar = styled.div`
   transition: visibility 0.1s linear;
 `;
 
-function Snackbar(props) {
+const Text = styled.span`
+  margin-right: 1em;
+  margin-left: 0.5em;
+`;
 
-  return <StyledSnackbar active={props.active}>{props.children}</StyledSnackbar>;
+function Snackbar(props) {
+  return (
+    <StyledSnackbar active={props.active} type={props.type}>
+      {handleIcon(props.type)}
+      <Text>{props.children}</Text>
+      <CloseIcon />
+    </StyledSnackbar>
+  );
 }
 
 export default Snackbar;

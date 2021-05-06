@@ -66,7 +66,7 @@ function Search(props) {
         setMovie={props.setMovie}
         nominations={props.nominations}
       />
-      <Snackbar active={error.state}>{error.message}</Snackbar>
+      <Snackbar active={error.state} type={"danger"}>{error.message}</Snackbar>
     </div>
   );
 }
