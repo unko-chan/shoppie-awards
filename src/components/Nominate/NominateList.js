@@ -5,18 +5,28 @@ import styled from "styled-components";
 const Nominate = styled.div`
   display: flex;
   flex-direction: column;
-  border: solid 3px orange;
   flex: 1;
+`;
+
+const StyledList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly ;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 function NominateList(props) {
   return (
     <Nominate>
-      Nominate List
-      <NominateListItem
-        nominations={props.nominations}
-        deleteNomination={props.deleteNomination}
-      />
+      Your Nominations!
+      <StyledList>
+        <NominateListItem
+          nominations={props.nominations}
+          deleteNomination={props.deleteNomination}
+        />
+      </StyledList>
     </Nominate>
   );
 }
