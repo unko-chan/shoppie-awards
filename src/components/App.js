@@ -8,6 +8,7 @@ import Header from "./Header";
 const CenterContainer = styled.div`
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 3px);
 `;
 
 function App(props) {
@@ -29,7 +30,6 @@ function App(props) {
 
   return (
     <CenterContainer>
-      {/* <Header /> */}
       <Search setMovie={addNomination} nominations={nomination} />
       <NominateList
         nominations={nomination}
