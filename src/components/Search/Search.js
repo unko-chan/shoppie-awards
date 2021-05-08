@@ -1,13 +1,27 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "../../styles/Search.scss";
-import "../../styles/Results.scss";
+import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import Results from "./Results";
 import Loading from "./Loading";
 import Snackbar from "../Snackbar";
 
 const API_KEY = process.env.REACT_APP_OMDB_KEY;
+
+const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: solid green 3px;
+  flex: 1.4;
+`;
+
+const ResultsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 17rem);
+  grid-gap: 1rem;
+  justify-items: center;
+  justify-content: center;
+`;
 
 function Search(props) {
   const [search, setSearch] = useState({
@@ -16,7 +30,7 @@ function Search(props) {
     loading: false,
   });
 
-  const [error, setError] = useState({state: false});
+  const [error, setError] = useState({ state: false });
 
   function handleError(message) {
     setSearch({
@@ -25,7 +39,7 @@ function Search(props) {
       loading: false,
     });
 
-    setError({state: true, message});
+    setError({ state: true, message });
   }
 
   useEffect(() => {
@@ -45,8 +59,6 @@ function Search(props) {
     axios
       .get(`http://www.omdbapi.com/?s=${search.term}&apikey=${API_KEY}`)
       .then((response) => {
-        console.log("data", response.data.Search);
-
         setSearch((search) => ({
           ...search,
           results: response.data.Search,
@@ -57,17 +69,25 @@ function Search(props) {
         handleError(error.message);
       });
   }, [search.term]);
+
   return (
-    <div className="search">
-      <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
-      <Loading loading={search.loading} />
-      <Results
-        results={search.results}
-        setMovie={props.setMovie}
-        nominations={props.nominations}
-      />
-      <Snackbar active={error.state} type={"danger"}>{error.message}</Snackbar>
-    </div>
+    <>
+      <LeftContainer>
+        <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
+        <ResultsContainer>
+          <Loading loading={search.loading} />
+          <Results
+            results={search.results}
+            setMovie={props.setMovie}
+            nominations={props.nominations}
+          />
+        </ResultsContainer>
+      </LeftContainer>
+
+      <Snackbar active={error.state} type={"danger"}>
+        {error.message}
+      </Snackbar>
+    </>
   );
 }
 

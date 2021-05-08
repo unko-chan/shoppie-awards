@@ -2,25 +2,28 @@ import React from "react";
 import Button from "./Button";
 import styled from "styled-components";
 
-const MovieContainer = styled.article`
+const MovieItem = styled.article`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  border: solid rgba(0, 0, 0, 0.233) 1px;
+  padding: 0.5em;
+  border: solid 1px black;
+  width: 15rem;
 `;
 
 const Poster = styled.img`
-  width: 48px;
+  width: 100%;
 `;
 
 const Movie = styled.div`
   display: flex;
   justify-content: space-between;
-  flex: 1;
+  width: 100%; ;
 `;
 
 function MovieListItem(props) {
   return (
-    <MovieContainer key={props.imdbID}>
+    <MovieItem key={props.imdbID}>
       <Poster src={props.Poster} />
       <Movie>
         <div>
@@ -34,7 +37,7 @@ function MovieListItem(props) {
           </Button>
         </div>
       </Movie>
-    </MovieContainer>
+    </MovieItem>
   );
 }
 

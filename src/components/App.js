@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import "../styles/App.scss";
+import styled from "styled-components";
 import Search from "./Search/Search.js";
 import NominateList from "./Nominate/NominateList.js";
 import Snackbar from "./Snackbar";
+import Header from "./Header";
+
+const CenterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 function App(props) {
   const [nomination, setNomination] = useState({});
@@ -22,7 +28,8 @@ function App(props) {
   };
 
   return (
-    <div className="app">
+    <CenterContainer>
+      {/* <Header /> */}
       <Search setMovie={addNomination} nominations={nomination} />
       <NominateList
         nominations={nomination}
@@ -31,7 +38,7 @@ function App(props) {
       <Snackbar active={maxNominations} type={"success"}>
         You have selected 5 nominations!
       </Snackbar>
-    </div>
+    </CenterContainer>
   );
 }
 
