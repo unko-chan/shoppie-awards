@@ -4,39 +4,61 @@ import styled from "styled-components";
 
 const MovieItem = styled.article`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5em;
-  border: solid 1px black;
-  width: 15rem;
+  padding: 1rem;
+  font-size: 14px;
+  background: #ededed;
+  margin-bottom: 0.1rem;
 `;
 
 const Poster = styled.img`
-  width: 100%;
+  height: 142px;
+  width: 96px;
 `;
 
-const Movie = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%; ;
+const Movie = styled.div``;
+
+const MovieInfo = styled.div`
+  padding-left: 1rem;
+`;
+
+const MovieTitle = styled.div`
+  font-weight: bold;
+  font-size: 16px;
+`;
+
+const MovieRating = styled.div`
+  font-size: 12px;
 `;
 
 function MovieListItem(props) {
   return (
     <MovieItem key={props.imdbID}>
       <Poster src={props.Poster} />
-      <Movie>
+      <MovieInfo>
+        <MovieTitle>
+          {props.Title} ({props.Year})
+        </MovieTitle>
+        <MovieRating>
+          {props.Rated} - {props.Genre}
+        </MovieRating>
+        <br />
+        <div>{props.Plot}</div>
         <div>
-          <div>{props.Title}</div>
-          <div>{props.Year}</div>
-          <a href={`https://www.imdb.com/title/${props.imdbID}`}>IMDb</a>
+          <b>Director: </b>
+          {props.Director}
         </div>
         <div>
-          <Button color={props.color} onClick={props.onClick}>
-            {props.button}
-          </Button>
+          <b>Stars: </b>
+          {props.Actors}
         </div>
-      </Movie>
+        <Movie>
+          <div>
+            <Button color={props.color} onClick={props.onClick}>
+              {props.button}
+            </Button>
+          </div>
+        </Movie>
+      </MovieInfo>
     </MovieItem>
   );
 }
