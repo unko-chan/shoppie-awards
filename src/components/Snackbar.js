@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import CloseIcon from "@material-ui/icons/Close";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
@@ -49,7 +49,7 @@ const handleBackground = (type) => {
 };
 
 const StyledSnackbar = styled.div`
-  visibility: ${(props) => (props.active ? "visible" : "hidden")};
+  visibility: ${(props) => (props.display ? "visible" : "hidden")};
   display: flex;
   justify-content: space-between;
   min-width: 250px;
@@ -64,18 +64,29 @@ const StyledSnackbar = styled.div`
   left: 50%;
   bottom: 30px;
   font-size: 1rem;
-  animation: ${(props) => (props.active ? fadeIn : fadeOut)} 0.1s ease;
+  animation: ${(props) => (props.display ? fadeIn : fadeOut)} 0.1s ease;
   transition: visibility 0.1s linear;
 `;
 
 const Text = styled.span`
-  margin-right: 1em;
+  margin-right: 0.5em;
   margin-left: 0.5em;
 `;
 
 function Snackbar(props) {
+  const [display, setDisplay] = useState(false);
+
+  useEffect(() => {
+    if (props.active) {
+      setDisplay(true);
+      setTimeout(() => {
+        setDisplay(false);
+      }, 5000);
+    }
+  }, [props.active]);
+
   return (
-    <StyledSnackbar active={props.active} type={props.type}>
+    <StyledSnackbar active={props.active} type={props.type} display={display}>
       {handleIcon(props.type)}
       <Text>{props.children}</Text>
       <CloseIcon />
