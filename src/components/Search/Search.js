@@ -5,22 +5,23 @@ import SearchBar from "./SearchBar";
 import Results from "./Results";
 import Loading from "./Loading";
 import Snackbar from "../Snackbar";
+import Header from "../Header";
+
 
 const API_KEY = process.env.REACT_APP_OMDB_KEY;
 
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: solid green 3px;
   flex: 1.4;
 `;
 
 const ResultsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 17rem);
-  grid-gap: 1rem;
-  justify-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 100vh;
 `;
 
 function Search(props) {
@@ -42,6 +43,22 @@ function Search(props) {
     setError({ state: true, message });
   }
 
+  async function getMovie(objectsToGet) {
+    let movieArray = [];
+    await Promise.all(
+      objectsToGet.map((movie) =>
+        axios
+          .get(
+            `http://www.omdbapi.com/?i=${movie.imdbID}&type=movie&apikey=cd3ba34b`
+          )
+          .then((response) => {
+            movieArray.push(response.data);
+          })
+      )
+    );
+    return movieArray;
+  }
+
   useEffect(() => {
     if (search.term === "" || search.term.length < 3) {
       setSearch({
@@ -57,11 +74,27 @@ function Search(props) {
     });
 
     axios
-      .get(`http://www.omdbapi.com/?s=${search.term}&apikey=${API_KEY}`)
+      .get(
+        `http://www.omdbapi.com/?s=${search.term}&type=movie&apikey=${API_KEY}`
+      )
       .then((response) => {
+        if (!response.data.Search) {
+          setSearch((search) => ({
+            ...search,
+            loading: false,
+          }));
+          return;
+        }
+
+        getMovie(response.data.Search).then((res) => {
+          setSearch({
+            ...search,
+            results: res,
+          });
+        });
+
         setSearch((search) => ({
           ...search,
-          results: response.data.Search,
           loading: false,
         }));
       })
@@ -73,6 +106,7 @@ function Search(props) {
   return (
     <>
       <LeftContainer>
+        <Header />
         <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
         <ResultsContainer>
           <Loading loading={search.loading} />
