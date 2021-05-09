@@ -41,10 +41,28 @@ const MoviePlot = styled.div`
   font-size 14px;
 `;
 
+const NoPoster = styled.div`
+  display: flex;
+  height: 140px;
+  width: 110px;
+  background: #474747;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #808080;
+`;
+
 function MovieListItem(props) {
   return (
     <MovieItem key={props.imdbID}>
-      <Poster src={props.Poster} />
+      {props.Poster === "N/A" ? (
+        <NoPoster>
+          <div>{props.Title}</div>
+        </NoPoster>
+      ) : (
+        <Poster src={props.Poster} alt={props.Title} />
+      )}
       <MovieInfo>
         <MovieTags>
           <MovieTitle>{props.Title}</MovieTitle>
@@ -58,7 +76,11 @@ function MovieListItem(props) {
           <MoviePlot>{props.Plot}</MoviePlot>
         </MovieTags>
         <MovieButton>
-          <Button color={props.color} onClick={props.onClick} disabled={props.disabled}>
+          <Button
+            color={props.color}
+            onClick={props.onClick}
+            disabled={props.disabled}
+          >
             {props.button}
           </Button>
         </MovieButton>
