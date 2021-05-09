@@ -2,32 +2,34 @@ import React from "react";
 import NominateListItem from "./NominateListItem";
 import styled from "styled-components";
 
-const Nominate = styled.div`
+const Nominations = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  &:hover {
+    overflow-y: overlay;
+  }
 `;
 
-const StyledList = styled.div`
+const RightContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly ;
-  overflow-x: hidden;
-  overflow-y: auto;
+  flex-direction: column;
+  padding: 1rem;
+  flex: 0.5;
 `;
 
 function NominateList(props) {
   return (
-    <Nominate>
-      Your Nominations!
-      <StyledList>
+    <RightContainer>
+      Your Nominations:
+      <Nominations>
         <NominateListItem
           nominations={props.nominations}
           deleteNomination={props.deleteNomination}
         />
-      </StyledList>
-    </Nominate>
+      </Nominations>
+    </RightContainer>
   );
 }
 
