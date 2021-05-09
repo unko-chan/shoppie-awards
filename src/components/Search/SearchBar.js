@@ -30,7 +30,7 @@ function SearchBar(props) {
 
   useEffect(() => {
     const handle = setTimeout(() => {
-      props.onSearch(value);
+      props.onSearch(value.trim());
     }, 400);
     return () => {
       clearTimeout(handle);
