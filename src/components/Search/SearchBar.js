@@ -9,10 +9,10 @@ const StyledForm = styled.form`
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   width: 35vw;
-  border: solid 1px grey;
+  border: solid 1px #474747;
   border-radius: 20px;
-  height: 2.5rem;
-  margin-top: 2rem;
+  min-height: 2.5rem;
+  margin-bottom: 2rem;
 `;
 
 const StyledSearchBar = styled.input`
@@ -21,6 +21,8 @@ const StyledSearchBar = styled.input`
   width: 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  background-color: #1d1e1f;
+  color: #fff;
 `;
 
 function SearchBar(props) {
@@ -37,7 +39,7 @@ function SearchBar(props) {
 
   return (
       <StyledForm onSubmit={(event) => event.preventDefault()}>
-        <SearchIcon color="disabled" />
+        <SearchIcon fontSize="small"/>
         <StyledSearchBar
           type="text"
           spellCheck="false"
