@@ -6,8 +6,8 @@ const MovieItem = styled.article`
   display: flex;
   padding: 1rem;
   font-size: 14px;
-  background: #ededed;
-  margin-bottom: 0.1rem;
+  background: #1d1e1f;
+  border-bottom: #474747 solid 1px;
 `;
 
 const Poster = styled.img`
@@ -15,10 +15,17 @@ const Poster = styled.img`
   width: 96px;
 `;
 
-const Movie = styled.div``;
+const MovieButton = styled.div`
+  margin-left: auto;
+`;
 
 const MovieInfo = styled.div`
   padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const MovieTitle = styled.div`
@@ -26,8 +33,12 @@ const MovieTitle = styled.div`
   font-size: 16px;
 `;
 
-const MovieRating = styled.div`
+const MovieTags = styled.div`
   font-size: 12px;
+`;
+
+const MoviePlot = styled.div`
+  font-size 14px;
 `;
 
 function MovieListItem(props) {
@@ -35,29 +46,22 @@ function MovieListItem(props) {
     <MovieItem key={props.imdbID}>
       <Poster src={props.Poster} />
       <MovieInfo>
-        <MovieTitle>
-          {props.Title} ({props.Year})
-        </MovieTitle>
-        <MovieRating>
-          {props.Rated} - {props.Genre}
-        </MovieRating>
-        <br />
-        <div>{props.Plot}</div>
-        <div>
-          <b>Director: </b>
-          {props.Director}
-        </div>
-        <div>
-          <b>Stars: </b>
-          {props.Actors}
-        </div>
-        <Movie>
+        <MovieTags>
+          <MovieTitle>{props.Title}</MovieTitle>
           <div>
-            <Button color={props.color} onClick={props.onClick}>
-              {props.button}
-            </Button>
+            {props.Year} | {props.Rated} | {props.Genre}
           </div>
-        </Movie>
+          <br />
+          <div>
+            {props.Director} | {props.Actors}
+          </div>
+          <MoviePlot>{props.Plot}</MoviePlot>
+        </MovieTags>
+        <MovieButton>
+          <Button color={props.color} onClick={props.onClick}>
+            {props.button}
+          </Button>
+        </MovieButton>
       </MovieInfo>
     </MovieItem>
   );
