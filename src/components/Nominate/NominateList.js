@@ -19,10 +19,15 @@ const RightContainer = styled.div`
   flex: 0.5;
 `;
 
+const NominationHeader = styled.div`
+border-bottom: #474747 solid 1px;
+padding: 1rem;
+`;
+
 function NominateList(props) {
   return (
     <RightContainer>
-      Your Nominations:
+      <NominationHeader>Your Nominations</NominationHeader>
       <Nominations>
         <NominateListItem
           nominations={props.nominations}
