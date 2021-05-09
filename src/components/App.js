@@ -3,12 +3,13 @@ import styled from "styled-components";
 import Search from "./Search/Search.js";
 import NominateList from "./Nominate/NominateList.js";
 import Snackbar from "./Snackbar";
-import Header from "./Header";
 
 const CenterContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: calc(100vh - 3px);
+  margin-left: 5rem;
+  margin-right: 5rem;
 `;
 
 function App(props) {
