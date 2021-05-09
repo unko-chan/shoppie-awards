@@ -58,7 +58,7 @@ function MovieListItem(props) {
           <MoviePlot>{props.Plot}</MoviePlot>
         </MovieTags>
         <MovieButton>
-          <Button color={props.color} onClick={props.onClick}>
+          <Button color={props.color} onClick={props.onClick} disabled={props.disabled}>
             {props.button}
           </Button>
         </MovieButton>

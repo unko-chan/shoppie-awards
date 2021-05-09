@@ -22,7 +22,7 @@ const StyledButton = styled.button`
 
 function Button(props) {
   return (
-    <StyledButton color={props.color} onClick={props.onClick}>
+    <StyledButton color={props.color} onClick={props.onClick} disabled={props.disabled}>
       {props.children}
     </StyledButton>
   );

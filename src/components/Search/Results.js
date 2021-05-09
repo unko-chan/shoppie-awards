@@ -7,15 +7,10 @@ let _ = require("lodash");
 function Results(props) {
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
-    props.results ? setSearchResults(props.results) : setSearchResults([]);
+    props.results.length ? setSearchResults(props.results) : setSearchResults([]);
   }, [props.results]);
 
-  if (!props.results) {
-    return <div>No results</div>;
-  }
-
   return _.uniqBy(searchResults, "imdbID")
-    .slice(0, 5)
     .map((movie) => {
       return (
         <MovieListItem
@@ -23,8 +18,14 @@ function Results(props) {
           {...movie}
           button={
             Object.keys(props.nominations).includes(movie.imdbID)
-              ? "Added"
+              ? "Added!"
               : "Add"
+          }
+          color={"primary"}
+          disabled={
+            Object.keys(props.nominations).includes(movie.imdbID)
+              ? true
+              : false
           }
         />
       );
