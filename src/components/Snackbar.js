@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import CloseIcon from "@material-ui/icons/Close";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
@@ -89,7 +88,6 @@ function Snackbar(props) {
     <StyledSnackbar active={props.active} type={props.type} display={display}>
       {handleIcon(props.type)}
       <Text>{props.children}</Text>
-      <CloseIcon />
     </StyledSnackbar>
   );
 }
