@@ -8,7 +8,7 @@ const StyledHeader = styled.img`
     margin: 2rem;
 `
 
-function Header(props) {
+function Header() {
     return (
         <StyledHeader src={banner}/>
     )
