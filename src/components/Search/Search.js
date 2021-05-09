@@ -7,21 +7,23 @@ import Loading from "./Loading";
 import Snackbar from "../Snackbar";
 import Header from "../Header";
 
-
 const API_KEY = process.env.REACT_APP_OMDB_KEY;
 
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1.4;
+  padding: 1rem;
+  border-right: solid 1px #474747;
 `;
 
 const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: 100vh;
+  overflow: hidden;
+  &:hover {
+    overflow-y: overlay;
+  }
 `;
 
 function Search(props) {
@@ -43,13 +45,13 @@ function Search(props) {
     setError({ state: true, message });
   }
 
-  async function getMovie(objectsToGet) {
+  async function getMovie(searchResults) {
     let movieArray = [];
     await Promise.all(
-      objectsToGet.map((movie) =>
+      searchResults.map((movie) =>
         axios
           .get(
-            `http://www.omdbapi.com/?i=${movie.imdbID}&type=movie&apikey=cd3ba34b`
+            `http://www.omdbapi.com/?i=${movie.imdbID}&type=movie&apikey=${API_KEY}`
           )
           .then((response) => {
             movieArray.push(response.data);
@@ -70,6 +72,7 @@ function Search(props) {
 
     setSearch({
       ...search,
+      results: [],
       loading: true,
     });
 
@@ -108,8 +111,8 @@ function Search(props) {
       <LeftContainer>
         <Header />
         <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
+        <Loading loading={search.loading} />
         <ResultsContainer>
-          <Loading loading={search.loading} />
           <Results
             results={search.results}
             setMovie={props.setMovie}
