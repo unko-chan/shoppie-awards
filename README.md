@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# View the website in action here!
+
+https://kliang-shopify-awards.herokuapp.com/
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
