@@ -6,6 +6,7 @@ import Results from "./Results";
 import Loading from "./Loading";
 import Snackbar from "../Snackbar";
 import Header from "../Header";
+import noResultsImg from "../../img/noResults.png"
 
 const API_KEY = process.env.REACT_APP_OMDB_KEY;
 
@@ -25,6 +26,20 @@ const ResultsContainer = styled.div`
     overflow-y: overlay;
   }
 `;
+
+const NoResults = styled.div`
+  text-align: center;
+  padding: 1rem;
+`;
+
+const NoResultsText = styled.div`
+  color: #7f7f7f;
+  padding: 1rem;
+`
+
+const NoResultsImg = styled.img`
+  width: 250px;
+`
 
 function Search(props) {
   const [search, setSearch] = useState({
@@ -86,6 +101,7 @@ function Search(props) {
         if (!response.data.Search) {
           setSearch((search) => ({
             ...search,
+            results: undefined,
             loading: false,
           }));
           return;
@@ -108,6 +124,8 @@ function Search(props) {
       });
   }, [search.term]);
 
+  console.log(search.results);
+
   return (
     <>
       <LeftContainer>
@@ -115,11 +133,19 @@ function Search(props) {
         <SearchBar onSearch={(term) => setSearch({ ...search, term })} />
         <Loading loading={search.loading} />
         <ResultsContainer>
-          <Results
-            results={search.results}
-            setMovie={props.setMovie}
-            nominations={props.nominations}
-          />
+          {search.results ? (
+            <Results
+              results={search.results}
+              setMovie={props.setMovie}
+              nominations={props.nominations}
+            />
+          ) : (
+            <NoResults>
+              <NoResultsText>Uh-oh! No results!</NoResultsText> 
+              <NoResultsImg src={noResultsImg}/>
+              <NoResultsText>Try again with different search terms!</NoResultsText> 
+            </NoResults>
+          )}
         </ResultsContainer>
       </LeftContainer>
 
