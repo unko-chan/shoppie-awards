@@ -97,12 +97,11 @@ function Search(props) {
             ...search,
             results: res,
           });
+          setSearch((search) => ({
+            ...search,
+            loading: false,
+          }));
         });
-
-        setSearch((search) => ({
-          ...search,
-          loading: false,
-        }));
       })
       .catch((error) => {
         handleError(error.message);
