@@ -17,6 +17,7 @@ const StyledButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   min-width: 5rem;
+  cursor: pointer;
   ${({ color }) => handleColorType(color)};
 `;
 
