@@ -52,7 +52,7 @@ function Search(props) {
       searchResults.map((movie) =>
         axios
           .get(
-            `http://www.omdbapi.com/?i=${movie.imdbID}&type=movie&apikey=${API_KEY}`
+            `https://www.omdbapi.com/?i=${movie.imdbID}&type=movie&apikey=${API_KEY}`
           )
           .then((response) => {
             movieArray.push(response.data);
@@ -79,7 +79,7 @@ function Search(props) {
 
     axios
       .get(
-        `http://www.omdbapi.com/?s=${search.term}&type=movie&apikey=${API_KEY}`
+        `https://www.omdbapi.com/?s=${search.term}&type=movie&apikey=${API_KEY}`
       )
       .then((response) => {
         //return if no results
