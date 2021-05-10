@@ -41,11 +41,12 @@ function Search(props) {
       results: [],
       loading: false,
     });
-
     setError({ state: true, message });
   }
 
+  //function for detailed movie results
   async function getMovie(searchResults) {
+    //return movieArray after all promises have been resolved
     let movieArray = [];
     await Promise.all(
       searchResults.map((movie) =>
@@ -81,6 +82,7 @@ function Search(props) {
         `http://www.omdbapi.com/?s=${search.term}&type=movie&apikey=${API_KEY}`
       )
       .then((response) => {
+        //return if no results
         if (!response.data.Search) {
           setSearch((search) => ({
             ...search,
@@ -89,6 +91,7 @@ function Search(props) {
           return;
         }
 
+        //pass initial response to second api request for detailed movie listings
         getMovie(response.data.Search).then((res) => {
           setSearch({
             ...search,

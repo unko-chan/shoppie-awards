@@ -12,7 +12,7 @@ const CenterContainer = styled.div`
   margin-right: 5rem;
 `;
 
-function App(props) {
+function App() {
   const [nomination, setNomination] = useState({});
   const nominationList = { ...nomination };
 
@@ -20,6 +20,8 @@ function App(props) {
 
   const addNomination = (movie) => {
     if (maxNominations) return;
+
+    //add to nominationList | imdbID as key : movie
     nominationList[movie.imdbID] = { ...movie };
     setNomination(nominationList);
   };

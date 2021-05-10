@@ -24,5 +24,5 @@ const Loader = styled.div`
 function Loading(props) {
   return <>{props.loading && <Loader />}</>;
 }
-// props.loading &&
+
 export default Loading;

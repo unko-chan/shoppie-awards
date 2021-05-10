@@ -20,8 +20,8 @@ const RightContainer = styled.div`
 `;
 
 const NominationHeader = styled.div`
-border-bottom: #474747 solid 1px;
-padding: 1rem;
+  border-bottom: #474747 solid 1px;
+  padding: 1rem;
 `;
 
 function NominateList(props) {

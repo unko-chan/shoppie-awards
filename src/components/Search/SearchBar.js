@@ -28,6 +28,7 @@ const StyledSearchBar = styled.input`
 function SearchBar(props) {
   const [value, setValue] = useState("");
 
+  //debouncer for live search
   useEffect(() => {
     const handle = setTimeout(() => {
       props.onSearch(value.trim());
