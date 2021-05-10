@@ -8,9 +8,7 @@ function Results(props) {
 
   //check if empty search
   useEffect(() => {
-    props.results.length
-      ? setSearchResults(props.results)
-      : setSearchResults([]);
+    props.results ? setSearchResults(props.results) : setSearchResults([]);
   }, [props.results]);
 
   //use lodash uniqBy to remove duplicate OMDB response results
