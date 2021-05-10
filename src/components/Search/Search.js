@@ -142,7 +142,7 @@ function Search(props) {
           ) : (
             <NoResults>
               <NoResultsText>Uh-oh! No results!</NoResultsText> 
-              <NoResultsImg src={noResultsImg}/>
+              <NoResultsImg src={noResultsImg} alt={"thinking emoji drawn with mspaint"}/>
               <NoResultsText>Try again with different search terms!</NoResultsText> 
             </NoResults>
           )}

@@ -9,7 +9,7 @@ const StyledHeader = styled.img`
 `;
 
 function Header() {
-  return <StyledHeader src={banner} />;
+  return <StyledHeader src={banner} alt={"(shopify logo drawn with mspaint) The Shopify Awards"}/>;
 }
 
 export default Header;

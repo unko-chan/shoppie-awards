@@ -26,7 +26,7 @@ function NominateListItem(props) {
     <NoNominations>
       <NoNominationsText>
         <div>Uh-oh! You currently have no nominations!</div>
-        <img src={sad} />
+        <img src={sad} alt={"sad face drawn with mspaint"}/>
         <div>Search for movies and add them to your list!</div>
       </NoNominationsText>
     </NoNominations>
